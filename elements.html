@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ecommerce-Auron Cakiqi</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.7/pixi.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+
+<body>
+
+  <header>
+    <a href="#" class="logo"><i class='bx bxs-t-shirt'></i> addidas</a>
+
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#new">New Arrivals</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+
+
+    </ul>
+
+    <div class="header-icons">
+      <i class="bx bx-menu" id="menu-icon"></i>
+      <i class="bx bx-search" id="search-icon"></i>
+      <i class="bx bx-cart-alt" id="cart-icon"></i>
+      <i class="bx bx-user" id="user-icon"></i>
+    </div>
+
+    <div class="search-box">
+      <input type="search" name="" id="" placeholder="Search Here...">
+    </div>
+
+
+    <div class="user">
+      <h2>Login Now</h2>
+      <input type="email" placeholder="Your Email...">
+      <input type="password" name="" id="" placeholder="Password">
+      <input type="submit" value="Login" class='login-btn'>
+      <p>Forget Password <a href="#">Reset Now</a></p>
+      <p>Dont have account <a href="#">Create One</a></p>
+    </div>
+  </header>
+
+
+  <video id="videoPlayer" width="500" height="400" controls>
+    <source src="img/video.mp4" type="video/mp4">
+  </video>
+
+  <div class="slider-container">
+    <canvas id="slider" class="slider">
+    </canvas>
+  </div>
+
+  <script>
+    const app = new PIXI.Application({
+      width: 800,
+      height: 400,
+      backgroundColor: 0x000000,
+      view: document.getElementById('slider'),
+    });
+
+    const imageUrls = ['C:/Users/Perdorues/Desktop/Auron Cakiqi - Project/img/{new1}'];
+
+    const loader = new PIXI.Loader();
+    imageUrls.forEach((url) => {
+      loader.add(url, url);
+    });
+
+    loader.load((_, resources) => {
+      const container = new PIXI.Container();
+
+      const sprites = imageUrls.map((url) => {
+        const sprite = new PIXI.Sprite(resources[url].texture);
+        sprite.width = app.renderer.width;
+        sprite.height = app.renderer.height;
+        sprite.visible = false;
+        container.addChild(sprite);
+        return sprite;
+      });
+
+      let currentIndex = 0;
+      const slide = () => {
+        const currentSprite = sprites[currentIndex];
+        const nextIndex = (currentIndex + 1) % sprites.length;
+        const nextSprite = sprites[nextIndex];
+
+        currentSprite.visible = false;
+        nextSprite.visible = true;
+
+        nextSprite.alpha = 0;
+        PIXI.Ticker.shared.add((delta) => {
+          nextSprite.alpha += 0.01 * delta;
+          if (nextSprite.alpha >= 1) {
+            nextSprite.alpha = 1;
+            PIXI.Ticker.shared.stop();
+          }
+        });
+
+        currentIndex = nextIndex;
+      };
+
+      container.addChild(sprites[0]);
+      app.stage.addChild(container);
+
+      setInterval(slide, 1000);
+    });
+  </script>
+
+
+
+  <div class="infographics-container">
+    <canvas id="infographics" class="infographics"></canvas>
+  </div>
+
+  <script>
+    const app2 = new PIXI.Application({
+      width: 800,
+      height: 400,
+      backgroundColor: 0x000000,
+      view: document.getElementById('infographics'),
+    });
+
+    const graphic = new PIXI.Graphics();
+    graphic.beginFill(0xFF0000);
+    graphic.drawRect(500, 0, 500, 500);
+    graphic.endFill();
+    app2.stage.addChild(graphic);
+
+    PIXI.Ticker.shared.add((delta) => {
+      graphic.rotation += 0.010 * delta;
+    });
+  </script>
+
+
+
+
+
+
+  <section class="footer">
+    <div class="footer-box">
+      <h2>addidas</h2>
+      <p>text...</p>
+      <div class="social">
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+        <a href="#"><i class="bx bxl-instagram"></i></a>
+        <a href="#"><i class="bx bxl-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-box">
+      <h3>Support</h3>
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Help and Support</a></li>
+      <li><a href="#">Return Policy</a></li>
+      <li><a href="#">Term of Use</a></li>
+      <li><a href="#">FAQ</a></li>
+    </div>
+    <div class="footer-box">
+      <h3>Our Branches</h3>
+      <li><a href="#">Pakistan</a></li>
+      <li><a href="#">Japan</a></li>
+      <li><a href="#">India</a></li>
+      <li><a href="#">United States</a></li>
+      <li><a href="#">Canada</a></li>
+    </div>
+    <div class="footer-box">
+      <h3>Payment Methods</h3>
+      <div class="payment">
+        <img src="img/visa.jpg" alt="">
+        <img src="img/mastercard.jpg" alt="">
+        <img src="img/paypal.jpg" alt="">
+        <img src="img/american-express.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
+<!--finished>

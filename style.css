@@ -466,29 +466,3 @@ footer-box p {
   padding-left: 300px;
   width: 900px;
 }
-
-.slider-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
-    padding-left: 300px;
-    width: 900px;
-}
-
-.slider {
-  width: 100%;
-  height: 100%;
-}
-
-.infographics-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
-    padding-left: 300px;
-    width: 900px;
-}
-
-.infographics {
-  width: 100%;
-  height: 100%;
-}
